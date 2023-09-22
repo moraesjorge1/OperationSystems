@@ -14,6 +14,7 @@ void cmd_hello2(char command[256]);
 void cmd_hello3(char command[256]);
 void cmd_create (char command[256]);
 void cmd_open (char command[256]);
+void shell (char command[256]);
 
 typedef struct {
     const char* name;
@@ -21,6 +22,7 @@ typedef struct {
 } Command;
 
 Command commands[] = {
+    {"fork", shell},
     {"open", cmd_open},
     {"create", cmd_create},
     {"hello3", cmd_hello3},
@@ -98,4 +100,19 @@ void cmd_open (char command[256])
       printf ("Arquivo 1 aberto\n");
    }
    
+}
+void shell (char command[256])
+{
+    pid_t pid = fork();
+    if (pid < 0) //erro
+    {  
+        perror("Erro no fork");
+        return;
+    }
+    
+    if (pid == 0) //Processo filho
+    {
+        printf("processo de ID %d, filho do pai de ID %d", getpid(), getppid());
+    }
+
 }
