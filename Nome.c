@@ -1,8 +1,0 @@
-#include<stdio>
-
-int main()
-{
-    printf("fodase");
-
-    return 0;
-}
